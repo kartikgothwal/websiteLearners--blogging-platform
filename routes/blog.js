@@ -7,6 +7,6 @@ router
   .get("/allblogs", BlogController.getAllBlogs)
   .post("/createblog", BlogController.createBlog)
   .patch("/editblog/:blogId", BlogController.editBlog)
-  .delete("/delete/:blogId", BlogController.deleteBlog);
+  .delete("/deleteblog/:blogId", BlogController.deleteBlog);
 
 exports.router = router;

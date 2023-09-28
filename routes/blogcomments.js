@@ -1,5 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const BlogController = require("../controller/blog");
-router.post("/addcomments/:blogId", BlogController.addComments);
+const BlogCommentsController = require("../controller/blogcomment");
+router
+  .post("/addcomment/:blogId", BlogCommentsController.addComments)
+  .patch("/editcomment/:blogId/:commentId", BlogCommentsController.editComment)
+  .delete(
+    "/deletecomment/:blogId/:commentId",
+    BlogCommentsController.deleteComment
+  );
 exports.router = router;

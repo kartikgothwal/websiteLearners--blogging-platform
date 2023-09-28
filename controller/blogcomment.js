@@ -28,3 +28,69 @@ exports.addComments = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+exports.editComment = async (req, res) => {
+  try {
+    const { blogId, commentId } = req.params;
+    const fetchBlog = await BlogModel.findById(blogId);
+    if (!fetchBlog) {
+      return res.status(404).json({ message: "Blog post not found" });
+    }
+    const comments = fetchBlog.comments;
+    if (!comments.length) {
+      return res.status(404).json({ message: "No comments exits" });
+    }
+    const TargetCommentIndex = comments.findIndex((item) => {
+      return item._id == commentId;
+    });
+    if (TargetCommentIndex === -1) {
+      return res.status(404).json({ message: "comment not found" });
+    }
+    if (comments[TargetCommentIndex].useremail !== req.body.decode) {
+      return res
+        .status(404)
+        .json({ message: "You can't edit someone else's comment" });
+    }
+    fetchBlog.comments[TargetCommentIndex].text = req.body.text;
+    const updatedBlog = await fetchBlog.save();
+
+    res.status(200).json({
+      message: "Comment has been updated",
+      updatedComment: updatedBlog.comments[TargetCommentIndex],
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.deleteComment = async (req, res) => {
+  try {
+    const { blogId, commentId } = req.params;
+    const fetchBlog = await BlogModel.findById(blogId);
+    if (!fetchBlog) {
+      return res.status(404).json({ message: "Blog post not found" });
+    }
+    const comments = fetchBlog.comments;
+    if (!comments.length) {
+      return res.status(404).json({ message: "No comments exits" });
+    }
+    const TargetCommentIndex = comments.findIndex((item) => {
+      return item._id == commentId;
+    });
+    if (TargetCommentIndex === -1) {
+      return res.status(404).json({ message: "comment not found" });
+    }
+    if (comments[TargetCommentIndex].useremail !== req.body.decode) {
+      return res
+        .status(404)
+        .json({ message: "You can't delete someone else's comment" });
+    }
+    fetchBlog.comments.splice(TargetCommentIndex, 1);
+    const updatedBlog = await fetchBlog.save();
+    res.status(200).json({
+      message: "Comment has been deleted",
+      updatedBlog,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
