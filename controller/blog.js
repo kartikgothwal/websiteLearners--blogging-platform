@@ -22,7 +22,7 @@ exports.createBlog = async (req, res) => {
         res.status(200).json({ message: "Blog has been created", data });
       })
       .catch((error) => {
-        res.status(400).json({ message: error.message });
+          res.status(400).json({ message: error.message });
       });
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -59,7 +59,7 @@ exports.getMyBlogs = async (req, res) => {
       return items.authorId.email == req.body.decode;
     });
     if (!userBlogs.length) {
-      res.status(200).json({
+     return res.status(200).json({
         message:
           "No blogs found, If you have not posted then, Please post a blog",
       });
@@ -89,6 +89,32 @@ exports.deleteBlog = async (req, res) => {
     }
     const deletedBlog = await BlogModel.findByIdAndDelete(fetchBlog._id);
     res.status(200).json({ message: "Blog has been deleted", deletedBlog });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.addComments = async (req, res) => {
+  try {
+    const { blogId } = req.params;
+    const fetchBlog = await BlogModel.findById(blogId);
+    if (!fetchBlog._id) {
+      return res.status(404).json({ message: "blog not found" });
+    }
+    const userData = await UserModel.findOne({ email: req.body.decode });
+    fetchBlog.comments.push({
+      username: userData.fullname,
+      useremail: userData.email,
+      text: req.body.text,
+    });
+    fetchBlog
+      .save()
+      .then((response) => {
+        res.status(201).json({ message: "Comment has been added", response });
+      })
+      .catch((err) => {
+        res.status(400).json({ message: "Something went wrong", err });
+      });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

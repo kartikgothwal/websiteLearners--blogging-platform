@@ -4,9 +4,9 @@ const BlogController = require("../controller/blog");
 
 router
   .get("/myblogs", BlogController.getMyBlogs)
+  .get("/allblogs", BlogController.getAllBlogs)
   .post("/createblog", BlogController.createBlog)
   .patch("/editblog/:blogId", BlogController.editBlog)
-  .get("/allblogs", BlogController.getAllBlogs)
   .delete("/delete/:blogId", BlogController.deleteBlog);
 
 exports.router = router;

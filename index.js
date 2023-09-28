@@ -43,11 +43,12 @@ const auth = async (req, res, next) => {
 //ROUTERS
 const AuthRouter = require("./routes/auth");
 const BlogRouter = require("./routes/blog");
-
+const BlogCommentsRouter = require("./routes/blogcomments");
 //MiddleWares
 app.use(express.json());
 app.use("/auth", AuthRouter.router);
 app.use("/blog", auth, BlogRouter.router);
+app.use("/blog/comments", auth, BlogCommentsRouter.router);
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello World!, file is running<h1>");
