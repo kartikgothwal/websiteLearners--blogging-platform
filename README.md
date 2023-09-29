@@ -31,7 +31,23 @@ Before you begin, ensure you have met the following requirements:
 
 3. Set up environment variables
    - Create a .env file in the root of the project and provide the following variables:
-   PORT=3000
-   MONGODB_URI=mongodb://localhost:27017/your-blog
-   JWT_SECRET=your-secret-key
+
+    ```bash
+    PORT=8000
+    DB_NAME=websiteLearnerTask
+    DB_USERNAME= your own database access username
+    DB_PASSWORD=your own database access password
+    PRIVATE_KEY= jwt private key with RSA256 algorithm of 2048 bytes
+    PUBLIC_KEY= jwt public key according to your private key
 Modify the values accordingly.
+
+
+4. Run the application
+
+     ```bash
+    npm start
+The application should be running on http://localhost:3000.
+
+5. Open the Postman extenstion or Postman desktop application 
+  - create a New HTTP Request
+- start typing the endpoints in the URL and type the data in the body as raw of type JSON
