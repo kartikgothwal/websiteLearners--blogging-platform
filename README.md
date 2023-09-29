@@ -11,17 +11,17 @@ This is a simple Blogging Platform built using Node.js, Express, JWT for authent
   - Authenticate and login a user
 
 - **Blog Management**
-  - Create a new blog
-  - Access all the blogs
-  - Access your own blogs
-  - Edit a blog (own blog)
-  - Delete a blog (own blog)
+  - Signed in users can create a new blog
+  - Signed in users can access all the blogs
+  - Signed in users can access your own blogs
+  - Signed in users can edit a blog (own blog)
+  - Signed in users can delete a blog (own blog)
 
 - **Commenting**
-  - Comment on any blog
-  - Edit own comment
-  - Access comments on the blog
-  - Delete own comment
+  -  Signed in users can comment on any blog
+  -  Signed in users can edit own comment
+  -  Signed in users can access comments on the blog
+  -  Signed in users can delete own comment
 
 ## Prerequisites
 
@@ -29,14 +29,14 @@ Before you begin, ensure you have met the following requirements:
 
 - Node.js and npm installed on your local machine
 - MongoDB atlas account with database access user
-- Postman or any API testing tool
+- Postman or any API testing tool for request handling
 
 ## Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/blogging-platform.git
+   git clone https://github.com/yourusername/websiteLearners--blogging-platform.git
 
 2. Install dependencies:
 
@@ -55,6 +55,7 @@ Before you begin, ensure you have met the following requirements:
     PUBLIC_KEY= jwt public key according to your private key
 Modify the values accordingly.
 
+Make sure to change this URL in index.js file if needed ``mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.ejahxrh.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority``
 
 4. Run the application
 
@@ -87,7 +88,7 @@ The application should be running on http://localhost:8000.
      "username": "type_your_username",
      "password": "type_your_password"
     }
-*You will get a token in response save that token inside the Authorization header of token type- Bearer Token and then paste the token data inside the token field*
+*You will get a token in response save that token inside the Authorization header of Postman token type - Bearer Token and then paste the token data inside the token field*
 - ### Login an existing User
 
     **POST /auth/user/login**
@@ -102,11 +103,12 @@ The application should be running on http://localhost:8000.
      "username": "type_your_username",
      "password": "type_your_password"
     }
-*You will get a token in response save that token inside the Authorization header of token type- Bearer Token and then paste the token data inside the token field*
+*You will get a token in response save that token inside the Authorization header of Postman token type - Bearer Token and then paste the token data inside the token field*
 
 ## Blog Endpoints
 
 - ### Create a new blog
+   Note- Only Signed In users can create new blogs
 
     **POST /blog/createblog**
 
@@ -132,10 +134,11 @@ The application should be running on http://localhost:8000.
     **GET /blog/myblogs**
 
 - ### Edit your own blog
+  Note- Only Signed In users can create new blogs
 
     **PATCH /blog/editblog/:blogId**
 
-    - On the place of blogID type in the blog Id you want to edit
+    - On the place of blogId type the blog Id of the blog you want to edit
     - In the postman type this raw data in the body with type JSON
     
     **Request Body:**
@@ -158,7 +161,7 @@ The application should be running on http://localhost:8000.
 
     **DELETE /blog/deleteblog/:blogId**
 
-    - On the place of blogID type in the blog Id you want to delete
+    - On the place of blogId type the blog Id of the blog  you want to delete
     - In the postman type this raw data in the body with type JSON
     
 ## Blog Comments Endpoints
@@ -167,7 +170,7 @@ The application should be running on http://localhost:8000.
 
     **POST /blog/comments/addcomment/:blogId**
 
-     - On the place of blogID type in the blog Id you want to add a comment under
+     - On the place of blogId type in the blog Id of the blog that you want to add a comment under
     - In the postman type this raw data in the body with type JSON
     
     **Request Body:**
@@ -196,3 +199,8 @@ The application should be running on http://localhost:8000.
 
      - Replace the blogID and commentId with the blog Id and the commentId of the blog and the comment that you want to delete 
     
+# Contributing
+  If you'd like to contribute, please fork the repository and     create a pull request. You can also create issues for bug reports or feature requests.
+
+# License
+  This project is licensed under the MIT License - see the LICENSE file for details.
