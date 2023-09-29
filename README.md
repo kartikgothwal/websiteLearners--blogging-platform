@@ -28,7 +28,7 @@ This is a simple Blogging Platform built using Node.js, Express, JWT for authent
   - ExpressJS
   - MongoDB
   - Mongoose
-  - JWT Authenticate
+  - JWT Token
   - bcrypt.JS
 
 ## Tool/Software Used
