@@ -23,6 +23,17 @@ This is a simple Blogging Platform built using Node.js, Express, JWT for authent
   -  Signed in users can access comments on the blog
   -  Signed in users can delete own comment
 
+## Technologies Used
+  - NodeJS
+  - ExpressJS
+  - MongoDB
+  - Mongoose
+  - JWT Authenticate
+  - bcrypt.JS
+
+## Tool/Software Used
+  - Postman
+
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
