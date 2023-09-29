@@ -194,12 +194,5 @@ The application should be running on http://localhost:8000.
 
     **DELETE /blog/comments/deletecomment/:blogId/:commentId**
 
-     - Replace the blogID and commentId with the blog Id and the commentId of the blog and the comment that you want to edit 
-    - In the postman type this raw data in the body with type JSON
+     - Replace the blogID and commentId with the blog Id and the commentId of the blog and the comment that you want to delete 
     
-    **Request Body:**
-
-    ```bash
-    {
-     "text": "type_your_updated__comment_here",
-    }
